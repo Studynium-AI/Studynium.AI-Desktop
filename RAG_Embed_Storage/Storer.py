@@ -11,7 +11,10 @@ def embedder():
     creates an embeddings instance (embedding-001) and returns it
     :return: embeddings instance
     """
-    return GoogleGenerativeAIEmbeddings(model="models/embedding-001",google_api_key=SecretStr("AIzaSyCvN-aVksUhdLNGepexUOIItXG8JCwRVaA"))
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    if api_key is None:
+         raise ValueError("The GOOGLE_API_KEY environment variable is not set.")
+    return GoogleGenerativeAIEmbeddings(model="models/embedding-001",google_api_key=SecretStr(api_key))
 
 def metaWriter(chunked: list[Document]):
     """
