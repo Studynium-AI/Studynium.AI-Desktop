@@ -50,7 +50,10 @@ def RAGen(prompt: str,modelInfo: int=0) -> str:
         answer = ollamaMod.invoke(RAGPrompt)
         answer =removeThinkTags(answer)
     elif modelInfo == 2:
-        genai.configure(api_key="AIzaSyCvN-aVksUhdLNGepexUOIItXG8JCwRVaA")
+        api_key = os.environ.get("GOOGLE_API_KEY")
+        if api_key is None:
+            raise ValueError("The GOOGLE_API_KEY environment variable is not set.")
+        genai.configure(api_key=api_key)
         generation_config = genai.GenerationConfig(
         temperature=0.3,
         top_p=0.95,
