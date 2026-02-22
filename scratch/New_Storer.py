@@ -12,10 +12,10 @@ def get_embedding_model():
     """
     Configures the google.generativeai library with the API key.
     """
-    # api_key = os.environ.get("GOOGLE_API_KEY")
-    # if api_key is None:
-    #     raise ValueError("The GOOGLE_API_KEY environment variable is not set.")
-    genai.configure(api_key="AIzaSyCvN-aVksUhdLNGepexUOIItXG8JCwRVaA")
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    if api_key is None:
+         raise ValueError("The GOOGLE_API_KEY environment variable is not set.")
+    genai.configure(api_key=api_key)
 
 
 def metaWriter(chunked_docs: List[Document]) -> List[Document]:
